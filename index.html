@@ -1,14 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <style></style>
-    <script></script>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+        color: rgb(43, 43, 43);
+      }
+
+      .main-header {
+        margin-bottom: 20px;
+      }
+      .calculator {
+        margin-right: 20%;
+        padding: 1rem;
+        border: 2px solid black;
+        min-height: 5rem;
+        flex-grow: 1;
+        background-color: rgb(158, 156, 156);
+      }
+      .screen {
+        margin: 2rem;
+        margin-top: 0rem;
+        padding: 1rem;
+        background-color: floralwhite;
+        border: 1px solid black;
+      }
+      .calculator button {
+        margin: 1rem;
+        padding: 1rem;
+        font-size: 20px;
+      }
+      .clear {
+        display: block;
+      }
+    </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
   </head>
   <body>
-    <span></span>
+    <header class="main-header">
+      <nav class="nav">
+        <ul>
+          <li><a>Home</a></li>
+          <li><a>About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="calculator">
+      <div class="screen"></div>
+      <div>
+        <button class="num" id="7" type="button" value="7">7</button>
+        <button class="num" id="8" type="button" value="8">8</button>
+        <button class="num" id="9" type="button" value="9">9</button>
+        <button class="num" id="times" type="button" value="*">*</button>
+      </div>
+      <div>
+        <button class="num" id="4" type="button" value="4">4</button>
+        <button class="num" id="5" type="button" value="5">5</button>
+        <button class="num" id="6" type="button" value="6">6</button>
+        <button class="num" id="operator" type="button" value="-">-</button>
+      </div>
+      <div>
+        <button class="num" id="1" type="button" value="1">1</button>
+        <button class="num" id="2" type="button" value="2">2</button>
+        <button class="num" id="3" type="button" value="3">3</button>
+        <button class="num" id="operator" type="button" value="+">+</button>
+      </div>
+      <div>
+        <button class="num" id="operator" type="button" value="=">=</button>
+        <button class="num" id="0" type="button" value="0">0</button>
+        <button class="num" id="decimal" type="button" value=".">.</button>
+        <button class="num" id="operator" type="button" value="/">/</button>
+      </div>
+      <div>
+        <button class="clear">Clear</button>
+      </div>
+    </div>
+    <script>
+      const list = [...document.querySelectorAll(".num")];
+      const firstArr = [];
+      let operator = "";
+      let numJoin = "";
+      let screenRefresh = "0";
+      const secondArr = [];
+      const screen = document.querySelector(".screen");
+
+      function add(a, b) {
+        return a + b;
+      }
+      function subtract(a, b) {
+        return a - b;
+      }
+      function multiply(a, b) {
+        return a * b;
+      }
+      function divide(a, b) {
+        return a / b;
+      }
+
+      for (let i = 0; i < list.length; i++) {
+        const currentBtn = list[i];
+        const currentNum = parseInt(currentBtn.value);
+
+        currentBtn.onclick = () => {
+          // inputs first number
+          if (Number.isInteger(currentNum) && operator == "") {
+            numJoin += currentNum;
+            screen.innerText = numJoin;
+
+            firstArr.push(currentNum);
+          }
+          // inputs Operator
+          else if (
+            currentBtn.value == "+" ||
+            currentBtn.value == "-" ||
+            currentBtn.value == "*" ||
+            currentBtn.value == "/"
+          ) {
+            operator = currentBtn.value;
+          }
+          //inputs last number
+          else if (Number.isInteger(currentNum) && operator != "") {
+            if (screenRefresh == 0) {
+              numJoin = "";
+              screenRefresh++;
+            }
+            numJoin += currentNum;
+            screen.innerText = numJoin;
+
+            secondArr.push(currentNum);
+          }
+          // populates final answer
+          else if (currentBtn.value == "=") {
+            const firstNum = Number(firstArr.join(""));
+            const secondNum = Number(secondArr.join(""));
+            if (operator == "+") {
+              screen.innerText = add(firstNum, secondNum);
+            } else if (operator == "-") {
+              screen.innerText = subtract(firstNum, secondNum);
+            } else if (operator == "*") {
+              screen.innerText = multiply(firstNum, secondNum);
+            } else if (operator == "/") {
+              screen.innerText = divide(firstNum, secondNum);
+            }
+          }
+        };
+
+        // currentBtn.onclick = () => {
+        //   if (currentBtn.value == "=") {
+
+        //     const opChoice = ["plus", "minus", "times", "divide"];
+
+        //     for (let i = 0; i > 4; i++) {
+
+        //     }
+
+        //     return console.log(firstNum);
+
+        //   } else if (Number.isInteger(currentNum)) {
+        //     console.log(currentNum);
+        //     return firstArr.push(currentNum);
+        //   } else if (operator == 0 && firstNum) {
+        //     return console.log("add");
+        //   } else if(){
+        //     const firstNum = Number(firstArr.join(""));
+        //     operator = currentButton.value;
+
+        //     return console.log(operator);
+        //     //operator.push(currentButton.value);
+        //   }
+        // };
+      }
+    </script>
   </body>
 </html>
