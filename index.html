@@ -74,6 +74,7 @@
         min-height: 10rem;
         font-size: 40px;
         padding: 2rem;
+        font-weight: 600;
       }
       #clgreen {
         background-color: rgb(152, 250, 152);
@@ -176,9 +177,10 @@
       let firstArr = [];
       let secondArr = [];
       let operator = "";
+      let prevOp = "";
       let numJoin = " ";
       let screenRefresh = 0;
-      let answer = 0;
+      let answer = "";
 
       function add(a, b) {
         return a + b;
@@ -206,13 +208,14 @@
           }
           // inputs Operator
           else if (
-            (currentBtn.value == "+" && numJoin != " ") ||
-            (currentBtn.value == "-" && numJoin != " ") ||
-            (currentBtn.value == "*" && numJoin != " ") ||
-            (currentBtn.value == "/" && numJoin != " ")
+            (currentBtn.value == "+" && !secondArr.length) ||
+            (currentBtn.value == "-" && !secondArr.length) ||
+            (currentBtn.value == "*" && !secondArr.length) ||
+            (currentBtn.value == "/" && !secondArr.length)
           ) {
             operator = currentBtn.value;
-            if (answer != 0) {
+            prevOp = operator;
+            if (answer != "") {
               firstArr = [];
               secondArr = [];
               numjoin = " ";
@@ -221,7 +224,7 @@
             }
           }
           //inputs last number
-          else if (Number.isInteger(currentNum) && operator != "") {
+          else if (Number.isInteger(currentNum) && firstArr.length) {
             if (screenRefresh == 0) {
               numJoin = " ";
               screenRefresh++;
@@ -230,23 +233,47 @@
             screen.innerText = numJoin;
             secondArr.push(currentNum);
           }
+          //  computes integers if operator before equals is pushed
+          else if (
+            (currentBtn.value == "+" && secondArr.length) ||
+            (currentBtn.value == "-" && secondArr.length) ||
+            (currentBtn.value == "*" && secondArr.length) ||
+            (currentBtn.value == "/" && secondArr.length)
+          ) {
+            firstNum = Number(firstArr.join(""));
+            secondNum = Number(secondArr.join(""));
+            if (prevOp == "+") {
+              answer = add(firstNum, secondNum);
+            } else if (prevOp == "-") {
+              answer = subtract(firstNum, secondNum);
+            } else if (prevOp == "*") {
+              answer = multiply(firstNum, secondNum);
+            } else if (prevOp == "/") {
+              answer = divide(firstNum, secondNum);
+            }
+            prevOp = currentBtn.value;
+            operator = prevOp;
+            firstArr = [];
+            screen.innerText = answer;
+            firstArr.push(answer);
+            secondArr = [];
+            screenRefresh = 0;
+          }
           // populates final answer
           else if (currentBtn.value == "=") {
             const firstNum = Number(firstArr.join(""));
             const secondNum = Number(secondArr.join(""));
             if (operator == "+") {
               answer = add(firstNum, secondNum);
-              screen.innerText = answer;
             } else if (operator == "-") {
               answer = subtract(firstNum, secondNum);
-              screen.innerText = answer;
             } else if (operator == "*") {
               answer = multiply(firstNum, secondNum);
-              screen.innerText = answer;
             } else if (operator == "/") {
               answer = divide(firstNum, secondNum);
-              screen.innerText = answer;
             }
+            screen.innerText = answer;
+            secondArr = [];
           }
           // clears the calculator
           else if (currentBtn.value == "clear") {
@@ -256,34 +283,9 @@
             screen.innerText = "  ";
             firstArr = [];
             secondArr = [];
-            answer = 0;
+            answer = "";
           }
         };
-
-        // currentBtn.onclick = () => {
-        //   if (currentBtn.value == "=") {
-
-        //     const opChoice = ["plus", "minus", "times", "divide"];
-
-        //     for (let i = 0; i > 4; i++) {
-
-        //     }
-
-        //     return console.log(firstNum);
-
-        //   } else if (Number.isInteger(currentNum)) {
-        //     console.log(currentNum);
-        //     return firstArr.push(currentNum);
-        //   } else if (operator == 0 && firstNum) {
-        //     return console.log("add");
-        //   } else if(){
-        //     const firstNum = Number(firstArr.join(""));
-        //     operator = currentButton.value;
-
-        //     return console.log(operator);
-        //     //operator.push(currentButton.value);
-        //   }
-        // };
       }
     </script>
   </body>
