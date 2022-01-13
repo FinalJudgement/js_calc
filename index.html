@@ -8,42 +8,85 @@
         color: rgb(43, 43, 43);
       }
 
+      body {
+        background: rgb(183, 219, 233);
+      }
+
       .main-header {
         margin-bottom: 20px;
       }
 
-      .calculator {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        padding: 1rem;
-        border: 2px solid black;
-        min-height: 5rem;
-
-        background-color: rgb(158, 156, 156);
+      main {
+        margin: 2rem;
       }
 
-      .screen {
-        margin: 2rem;
-        margin-top: 0rem;
-        padding: 1rem;
-        background-color: floralwhite;
-        border: 1px solid black;
+      .calculator {
+        height: 40rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+      }
+      .box {
+        height: 100%;
+        display: flex;
+
+        border: 2px solid black;
+      }
+      .calc {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        background-color: rgb(196, 195, 195);
+        width: 100%;
       }
 
       .row {
         display: flex;
-        justify-content: space-around;
-      }
-
-      .calculator button {
-        margin: 1rem;
-        padding: 1rem;
-        font-size: 20px;
+        flex-direction: row;
+        justify-content: flex-start;
+        height: 100%;
       }
 
       .clear {
-        display: block;
+        width: 25%;
+        display: flex;
+      }
+
+      .row:nth-of-type(6) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #equal {
+        background-color: rgb(86, 86, 86, 0);
+      }
+      #equal:hover {
+        background-color: rgb(86, 86, 86, 0.5);
+      }
+      .screen {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: flex-end;
+        background-color: rgb(224, 224, 224);
+        border: 1px solid black;
+        min-height: 10rem;
+        font-size: 40px;
+        padding: 2rem;
+      }
+      #clgreen {
+        background-color: rgb(152, 250, 152);
+        display: flex;
+        align-items: center;
+      }
+      .calculator button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 2rem;
+        font-size: 20px;
       }
     </style>
     <meta charset="UTF-8" />
@@ -60,44 +103,82 @@
         </ul>
       </nav>
     </header>
-    <div class="calculator">
-      <div class="screen"></div>
-      <div class="row">
-        <button class="num" id="7" type="button" value="7">7</button>
-        <button class="num" id="8" type="button" value="8">8</button>
-        <button class="num" id="9" type="button" value="9">9</button>
-        <button class="num" id="times" type="button" value="*">*</button>
+    <main>
+      <div class="calculator">
+        <div class="box">
+          <div class="calc">
+            <div class="screen"></div>
+            <div class="row">
+              <button class="num" id="7" type="button" value="7">
+                <strong>7</strong>
+              </button>
+              <button class="num" id="8" type="button" value="8">
+                <strong>8</strong>
+              </button>
+              <button class="num" id="9" type="button" value="9">
+                <strong>9</strong>
+              </button>
+              <button class="num" id="times" type="button" value="*">*</button>
+            </div>
+            <div class="row">
+              <button class="num" id="4" type="button" value="4">
+                <strong>4</strong>
+              </button>
+              <button class="num" id="5" type="button" value="5">
+                <strong>5</strong>
+              </button>
+              <button class="num" id="6" type="button" value="6">
+                <strong>6</strong>
+              </button>
+              <button class="num" id="operator" type="button" value="-">
+                -
+              </button>
+            </div>
+            <div class="row">
+              <button class="num" id="1" type="button" value="1">
+                <strong>1</strong>
+              </button>
+              <button class="num" id="2" type="button" value="2">
+                <strong>2</strong>
+              </button>
+              <button class="num" id="3" type="button" value="3">
+                <strong>3</strong>
+              </button>
+              <button class="num" id="operator" type="button" value="+">
+                +
+              </button>
+            </div>
+            <div class="row">
+              <button class="num" id="decimal" type="button" value=".">
+                .
+              </button>
+              <button class="num" id="0" type="button" value="0">
+                <strong>0</strong>
+              </button>
+              <button class="num" id="equal" type="button" value="=">=</button>
+              <button class="num" id="operator" type="button" value="/">
+                /
+              </button>
+            </div>
+          </div>
+          <div class="clear">
+            <button class="num" id="clgreen" type="button" value="clear">
+              C
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <button class="num" id="4" type="button" value="4">4</button>
-        <button class="num" id="5" type="button" value="5">5</button>
-        <button class="num" id="6" type="button" value="6">6</button>
-        <button class="num" id="operator" type="button" value="-">-</button>
-      </div>
-      <div class="row">
-        <button class="num" id="1" type="button" value="1">1</button>
-        <button class="num" id="2" type="button" value="2">2</button>
-        <button class="num" id="3" type="button" value="3">3</button>
-        <button class="num" id="operator" type="button" value="+">+</button>
-      </div>
-      <div class="row">
-        <button class="num" id="operator" type="button" value="=">=</button>
-        <button class="num" id="0" type="button" value="0">0</button>
-        <button class="num" id="decimal" type="button" value=".">.</button>
-        <button class="num" id="operator" type="button" value="/">/</button>
-      </div>
-      <div class="row">
-        <button class="clear">Clear</button>
-      </div>
-    </div>
+    </main>
+
     <script>
       const list = [...document.querySelectorAll(".num")];
-      const firstArr = [];
-      let operator = "";
-      let numJoin = "";
-      let screenRefresh = "0";
-      const secondArr = [];
       const screen = document.querySelector(".screen");
+      let firstArr = [];
+      let secondArr = [];
+      let operator = "";
+      let numJoin = " ";
+      let screenRefresh = 0;
+      let answer = 0;
 
       function add(a, b) {
         return a + b;
@@ -121,27 +202,32 @@
           if (Number.isInteger(currentNum) && operator == "") {
             numJoin += currentNum;
             screen.innerText = numJoin;
-
             firstArr.push(currentNum);
           }
           // inputs Operator
           else if (
-            currentBtn.value == "+" ||
-            currentBtn.value == "-" ||
-            currentBtn.value == "*" ||
-            currentBtn.value == "/"
+            (currentBtn.value == "+" && numJoin != " ") ||
+            (currentBtn.value == "-" && numJoin != " ") ||
+            (currentBtn.value == "*" && numJoin != " ") ||
+            (currentBtn.value == "/" && numJoin != " ")
           ) {
             operator = currentBtn.value;
+            if (answer != 0) {
+              firstArr = [];
+              secondArr = [];
+              numjoin = " ";
+              firstArr.push(answer);
+              screenRefresh = 0;
+            }
           }
           //inputs last number
           else if (Number.isInteger(currentNum) && operator != "") {
             if (screenRefresh == 0) {
-              numJoin = "";
+              numJoin = " ";
               screenRefresh++;
             }
             numJoin += currentNum;
             screen.innerText = numJoin;
-
             secondArr.push(currentNum);
           }
           // populates final answer
@@ -149,14 +235,28 @@
             const firstNum = Number(firstArr.join(""));
             const secondNum = Number(secondArr.join(""));
             if (operator == "+") {
-              screen.innerText = add(firstNum, secondNum);
+              answer = add(firstNum, secondNum);
+              screen.innerText = answer;
             } else if (operator == "-") {
-              screen.innerText = subtract(firstNum, secondNum);
+              answer = subtract(firstNum, secondNum);
+              screen.innerText = answer;
             } else if (operator == "*") {
-              screen.innerText = multiply(firstNum, secondNum);
+              answer = multiply(firstNum, secondNum);
+              screen.innerText = answer;
             } else if (operator == "/") {
-              screen.innerText = divide(firstNum, secondNum);
+              answer = divide(firstNum, secondNum);
+              screen.innerText = answer;
             }
+          }
+          // clears the calculator
+          else if (currentBtn.value == "clear") {
+            operator = "";
+            numJoin = " ";
+            screenRefresh = 0;
+            screen.innerText = "  ";
+            firstArr = [];
+            secondArr = [];
+            answer = 0;
           }
         };
 
